@@ -39,7 +39,10 @@ export default function DonePage() {
         </CardContent>
       </Card>
 
-      <ThemeBuddy message="You did it. Confetti hoof-kicks, sparkles, and triumphant birthday prancing all around." />
+      <ThemeBuddy
+        message="You did it. Confetti hoof-kicks, sparkles, and triumphant birthday prancing all around."
+        variant="celebration"
+      />
     </main>
   );
 }

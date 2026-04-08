@@ -52,7 +52,10 @@ export default async function HuntStepPage({ params }: HuntStepPageProps) {
         totalSteps={allSteps.length}
       />
 
-      <ThemeBuddy message="A gentle hoof-tap hint: once you find this spot, the hidden QR should whisk you onward." />
+      <ThemeBuddy
+        message="A gentle hoof-tap hint: once you find this spot, the hidden QR should whisk you onward."
+        stepNumber={currentIndex + 1}
+      />
 
       <Card className="bg-[linear-gradient(180deg,rgba(241,251,255,0.95),rgba(255,255,255,0.82))]">
         <CardContent className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

@@ -1,18 +1,18 @@
 {
   "event": {
-    "title": "Present Pursuit",
+    "title": "Treasure Trail",
     "subtitle": "A pocket-sized trail of playful clues, with Bubbles trotting beside you.",
     "themeId": "unicorn",
     "introEyebrow": "A Sparkly Adventure",
-    "introHeadline": "A present waits at trail's end",
+    "introHeadline": "Treasure Trail",
     "introPoem": [
-      "Keep this little phone close by your side,",
-      "through every corner, clue, and stride.",
+      "Keep this little phone tucked near,",
+      "for every clue will guide you here.",
       "Each hidden code will light your way,",
       "as Bubbles cheers your grand hooray."
     ],
     "startStepId": "question-1",
-    "startLabel": "Begin The Pursuit",
+    "startLabel": "Begin The Trail",
     "celebrationEyebrow": "Ta-Da",
     "celebrationTitle": "The final verse has led you here",
     "celebrationPoem": [
