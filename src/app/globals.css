@@ -1,0 +1,129 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-display);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+}
+
+:root {
+  color-scheme: light;
+  --font-display:
+    "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "URW Palladio L",
+    serif;
+  --font-body: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+  --background: #fff8f3;
+  --foreground: #4e3158;
+  --card: #fffdfc;
+  --card-foreground: #4e3158;
+  --primary: #e8556c;
+  --primary-2: #f7a64a;
+  --primary-foreground: #ffffff;
+  --secondary: #fff3dc;
+  --secondary-foreground: #4e3158;
+  --muted: #fff4f7;
+  --muted-foreground: #8a6886;
+  --accent: #ffe7b8;
+  --accent-foreground: #6b4a22;
+  --accent-ink: #9f5a1b;
+  --paper: #fffaf0;
+  --border: rgba(170, 118, 145, 0.28);
+  --border-strong: rgba(170, 118, 145, 0.44);
+  --ring: #e8556c;
+  --ring-soft: rgba(232, 85, 108, 0.2);
+  --radius: 1.5rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--foreground);
+  background:
+    radial-gradient(
+      circle at 10% 16%,
+      rgba(255, 255, 255, 0.92),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 85% 14%,
+      rgba(255, 226, 168, 0.7),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 82% 68%,
+      rgba(159, 220, 255, 0.42),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 12% 88%,
+      rgba(255, 195, 206, 0.4),
+      transparent 24%
+    ),
+    linear-gradient(180deg, #fff8f3 0%, #fff3f8 42%, #eef8ff 100%);
+  font-family: var(--font-body), sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.42;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(circle at center, black 28%, transparent 95%);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: rgba(247, 166, 74, 0.35);
+}
+
+@media print {
+  body::before,
+  header {
+    display: none;
+  }
+
+  body {
+    background: white;
+  }
+}

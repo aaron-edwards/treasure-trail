@@ -1,0 +1,119 @@
+{
+  "event": {
+    "title": "Present Pursuit",
+    "subtitle": "A pocket-sized trail of playful clues, with Bubbles trotting beside you.",
+    "themeId": "unicorn",
+    "introEyebrow": "A Sparkly Adventure",
+    "introHeadline": "A present waits at trail's end",
+    "introPoem": [
+      "Keep this little phone close by your side,",
+      "through every corner, clue, and stride.",
+      "Each hidden code will light your way,",
+      "as Bubbles cheers your grand hooray."
+    ],
+    "startStepId": "question-1",
+    "startLabel": "Begin The Pursuit",
+    "celebrationEyebrow": "Ta-Da",
+    "celebrationTitle": "The final verse has led you here",
+    "celebrationPoem": [
+      "You followed each rhyme from clue to clue,",
+      "and now the sparkly trail is through.",
+      "Your final surprise belongs right here,",
+      "with happy hearts and unicorn cheer."
+    ],
+    "qrBaseUrl": "https://your-vercel-url.vercel.app"
+  },
+  "steps": [
+    {
+      "id": "question-1",
+      "title": "The Tiny Sage's Secret",
+      "eyebrow": "Clue one",
+      "locationHint": "A tiny sage with pointed palm and watchful eyes",
+      "poem": [
+        "Seek the tiny sage so wise,",
+        "with pointed palm and watchful eyes.",
+        "Behind that pose, where secrets stay,",
+        "your next small verse is tucked away."
+      ],
+      "note": "Look behind the Baby Yoda statue with one hand stretched out like the Force."
+    },
+    {
+      "id": "question-2",
+      "title": "Disco Reflection",
+      "eyebrow": "Clue two",
+      "locationHint": "Where your face looks back with disco sparkle",
+      "poem": [
+        "Find where your face looks back at you,",
+        "with disco sparkle shining through.",
+        "Behind that shine, just out of view,",
+        "another singing clue waits for you."
+      ],
+      "note": "Check behind the mirror that has been decorated with mirror balls."
+    },
+    {
+      "id": "question-3",
+      "title": "Under Gentle Cover",
+      "eyebrow": "Clue three",
+      "locationHint": "Garden rows where summer sweetness grows",
+      "poem": [
+        "Step outside to garden rows,",
+        "where summer sweetness softly grows.",
+        "By the net stretched up around,",
+        "your clue is waiting to be found."
+      ],
+      "note": "Check the strawberry patch outside, around the makeshift netting setup."
+    },
+    {
+      "id": "question-4",
+      "title": "The Staring Pair",
+      "eyebrow": "Clue four",
+      "locationHint": "The biggest round eyes in the house",
+      "poem": [
+        "Big round eyes that never blink,",
+        "watching snacks and every drink.",
+        "Find the biggest staring pair,",
+        "your next small clue is hiding there."
+      ],
+      "note": "Check the biggest googly eyes in the house, on the fridge."
+    },
+    {
+      "id": "question-5",
+      "title": "Reborn Sparkle",
+      "eyebrow": "Clue five",
+      "locationHint": "Old trash reborn in gems and bright display",
+      "poem": [
+        "Find old trash reborn today,",
+        "now dressed in gems and bright display.",
+        "A crafty glow with vibrant hair,",
+        "your next small clue is hidden there."
+      ],
+      "note": "Look near your 'trash pony' craft project: the one bedazzled with gems, purple hair, and a horn."
+    },
+    {
+      "id": "question-6",
+      "title": "The Little Hidden Door",
+      "eyebrow": "Clue six",
+      "locationHint": "Where tiny doors in stumps appear",
+      "poem": [
+        "Where tiny doors in stumps appear,",
+        "and fairy whispers hover near,",
+        "behind that little story space,",
+        "your waiting clue is tucked in place."
+      ],
+      "note": "Check behind the tree stump fairy house."
+    },
+    {
+      "id": "question-7",
+      "title": "Bean's Golden Finale",
+      "eyebrow": "Final clue",
+      "locationHint": "A gold remembrance of Bean",
+      "poem": [
+        "For many days at Bean's own place,",
+        "we shared his couch and goofy face.",
+        "One runny day became household fame,",
+        "now find him in gold to end this game."
+      ],
+      "note": "Look near the gold statue of Pinto Bean."
+    }
+  ]
+}
