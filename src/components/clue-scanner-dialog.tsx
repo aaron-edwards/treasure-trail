@@ -1,6 +1,7 @@
 "use client";
 
-import { CheckCircle2, ScanQrCode, TriangleAlert } from "lucide-react";
+import { ScanQrCode } from "lucide-react";
+import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 
 import { ThemeBuddy } from "@/components/theme-buddy";
@@ -8,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -37,6 +37,26 @@ type ClueScannerDialogProps = {
   successMessage: string;
   continueLabel: string;
 };
+
+const CELEBRATION_MESSAGES = [
+  "A clever find, right on cue.",
+  "That little rhyme led true.",
+  "You found the spot. Hooray for you.",
+  "Another verse is fluttering through.",
+  "Your unicorn buddy approves of you.",
+];
+
+const CONFETTI_PIECES = Array.from({ length: 20 }, (_, index) => ({
+  id: `confetti-${index + 1}`,
+  offset: index,
+  left: [
+    8, 18, 29, 40, 51, 63, 74, 85, 12, 23, 35, 46, 58, 69, 81, 15, 27, 49, 66,
+    78,
+  ][index],
+  top: [
+    9, 6, 11, 7, 13, 8, 12, 10, 20, 17, 22, 18, 24, 19, 21, 30, 27, 29, 26, 31,
+  ][index],
+}));
 
 function normalizePathname(value: string) {
   return value.replace(/\/+$/, "") || "/";
@@ -67,6 +87,7 @@ export function ClueScannerDialog({
   const [statusMessage, setStatusMessage] = useState(
     "Hold the hidden QR inside the frame and keep the phone steady for a moment.",
   );
+  const [celebrationMessage, setCelebrationMessage] = useState(successMessage);
   const [availabilityMessage, setAvailabilityMessage] = useState<string | null>(
     null,
   );
@@ -207,6 +228,11 @@ export function ClueScannerDialog({
                 if (scannedPathname === expectedPathname) {
                   setFeedback("success");
                   setStatusMessage("That is the right QR.");
+                  setCelebrationMessage(
+                    CELEBRATION_MESSAGES[
+                      Math.floor(Math.random() * CELEBRATION_MESSAGES.length)
+                    ] ?? successMessage,
+                  );
 
                   feedbackTimeoutRef.current = window.setTimeout(() => {
                     if (streamRef.current) {
@@ -283,7 +309,7 @@ export function ClueScannerDialog({
         streamRef.current = null;
       }
     };
-  }, [expectedDestination, open, phase]);
+  }, [expectedDestination, open, phase, successMessage]);
 
   function handleOpenChange(nextOpen: boolean) {
     setOpen(nextOpen);
@@ -295,6 +321,7 @@ export function ClueScannerDialog({
       setStatusMessage(
         "Hold the hidden QR inside the frame and keep the phone steady for a moment.",
       );
+      setCelebrationMessage(successMessage);
     }
   }
 
@@ -309,32 +336,41 @@ export function ClueScannerDialog({
 
       <DialogContent className="max-w-xl">
         {phase === "success" ? (
-          <div className="space-y-5 py-2">
-            <div className="space-y-3 text-center">
-              <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[linear-gradient(135deg,#83d986,#41ba6f)] text-white shadow-[0_16px_34px_rgba(65,186,111,0.28)]">
-                <CheckCircle2 className="h-7 w-7" />
-              </div>
+          <div className="relative space-y-5 overflow-hidden py-2">
+            <div className="confetti-burst" aria-hidden="true">
+              {CONFETTI_PIECES.map((piece) => (
+                <span
+                  className="confetti-piece"
+                  key={piece.id}
+                  style={
+                    {
+                      "--confetti-index": piece.offset,
+                      "--confetti-left": `${piece.left}%`,
+                      "--confetti-top": `${piece.top}%`,
+                    } as CSSProperties
+                  }
+                />
+              ))}
+            </div>
+            <div className="relative z-10 space-y-3 text-center">
               <p className="text-xs font-bold uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
-                QR matched
+                Sparkly Success
               </p>
-              <h3 className="font-serif text-4xl text-[color:var(--foreground)]">
-                {successMessage}
+              <h3 className="font-serif text-4xl text-[color:var(--foreground)] sm:text-5xl">
+                {celebrationMessage}
               </h3>
-              <p className="text-sm leading-6 text-[color:var(--muted-foreground)]">
-                You found the correct code. Ready for the next part of the
-                treasure trail?
-              </p>
             </div>
 
             <ThemeBuddy
-              className="bg-[linear-gradient(180deg,rgba(255,248,233,0.86),rgba(255,255,255,0.74))]"
-              message="Bubbles approves. Sparkles, prancing, onward."
+              className="relative z-10 mx-auto"
+              imageOnly
+              message=""
               variant="celebration"
             />
 
-            <div className="flex justify-center">
+            <div className="relative z-10 flex justify-center pt-1">
               <Button
-                className="w-full sm:w-auto"
+                className="w-full shadow-none hover:translate-y-0 sm:w-auto"
                 onClick={() => window.location.assign(expectedDestination)}
                 size="lg"
                 type="button"
@@ -344,16 +380,15 @@ export function ClueScannerDialog({
             </div>
           </div>
         ) : (
-          <div className="space-y-5">
-            <DialogHeader>
-              <p className="text-xs font-bold uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
-                Scanner
-              </p>
-              <DialogTitle>Scan the hidden QR</DialogTitle>
-              <DialogDescription>
-                Use the in-app camera to check the code at this clue location.
-              </DialogDescription>
-            </DialogHeader>
+          <div className="space-y-6">
+            <div className="pr-10">
+              <DialogHeader className="gap-1.5">
+                <p className="text-xs font-bold uppercase tracking-[0.28em] text-[color:var(--muted-foreground)]">
+                  Scanner
+                </p>
+                <DialogTitle>Scan the hidden QR</DialogTitle>
+              </DialogHeader>
+            </div>
 
             {availabilityMessage ? (
               <div className="rounded-[24px] border border-[rgba(220,110,110,0.35)] bg-[rgba(255,244,244,0.9)] p-4 text-sm leading-6 text-[color:#8f4b4b]">
@@ -361,8 +396,8 @@ export function ClueScannerDialog({
               </div>
             ) : (
               <>
-                <div className="relative overflow-hidden rounded-[28px] border border-white/70 bg-[color:var(--paper)] p-3 shadow-inner">
-                  <div className="aspect-[3/4] overflow-hidden rounded-[22px] bg-[linear-gradient(180deg,rgba(241,232,216,0.88),rgba(229,217,202,0.75))]">
+                <div className="relative overflow-hidden rounded-[30px] border border-white/70 bg-[color:var(--paper)] p-3 shadow-inner sm:p-4">
+                  <div className="aspect-square overflow-hidden rounded-[24px] bg-[linear-gradient(180deg,rgba(241,232,216,0.88),rgba(229,217,202,0.75))]">
                     <video
                       autoPlay
                       className="h-full w-full object-cover"
@@ -373,7 +408,7 @@ export function ClueScannerDialog({
                   </div>
                   <div
                     className={cn(
-                      "pointer-events-none absolute inset-[1.7rem] rounded-[24px] border-4 border-white/85 shadow-[0_0_0_999px_rgba(255,255,255,0.06)] transition-colors duration-200",
+                      "pointer-events-none absolute inset-[1.4rem] rounded-[24px] border-4 border-white/85 shadow-[0_0_0_999px_rgba(255,255,255,0.06)] transition-colors duration-200 sm:inset-[1.9rem]",
                       feedback === "success" &&
                         "border-[#5dc978] shadow-[0_0_0_999px_rgba(93,201,120,0.18)]",
                       feedback === "error" &&
@@ -382,19 +417,11 @@ export function ClueScannerDialog({
                   />
                 </div>
 
-                <p className="text-center text-sm leading-6 text-[color:var(--muted-foreground)]">
+                <p className="px-2 text-center text-sm leading-6 text-[color:var(--muted-foreground)]">
                   {statusMessage}
                 </p>
               </>
             )}
-
-            <div className="flex items-start gap-3 rounded-[22px] bg-white/65 p-4">
-              <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--accent-ink)]" />
-              <p className="text-sm leading-6 text-[color:var(--muted-foreground)]">
-                If your browser blocks the in-app scanner, you can still use the
-                phone camera app to open the next clue as a fallback.
-              </p>
-            </div>
           </div>
         )}
       </DialogContent>

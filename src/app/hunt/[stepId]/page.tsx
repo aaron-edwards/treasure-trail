@@ -1,5 +1,3 @@
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ClueScannerDialog } from "@/components/clue-scanner-dialog";
@@ -38,16 +36,7 @@ export default async function HuntStepPage({ params }: HuntStepPageProps) {
 
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-4 py-5 sm:gap-6 sm:px-6 sm:py-10">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--muted-foreground)] transition-colors hover:text-[color:var(--foreground)]"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to intro
-        </Link>
-        <StepProgress currentIndex={currentIndex} total={allSteps.length} />
-      </div>
+      <StepProgress currentIndex={currentIndex} total={allSteps.length} />
 
       <PoemCard
         scannerButton={
