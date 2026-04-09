@@ -9,7 +9,7 @@ The app is currently configured from a single JSON file and is designed so that 
 Current experience:
 
 - `/` landing page with the intro poem and Bubbles the unicorn
-- `/hunt/[stepId]` clue pages with poem clues, buddy art, and an in-app QR scanner dialog
+- `/hunt/[stepId]` clue pages with poem clues, buddy art, and URL-driven scanner states
 - `/done` finale page
 - `/dev/qrs` printable QR sheet that uses the current host automatically
 
@@ -47,6 +47,7 @@ Unicorn artwork lives in:
 ## Project Notes
 
 - The home and clue pages are optimized for mobile-first use during an actual scavenger hunt.
-- Clue pages now include an in-app QR scanner dialog that validates the next expected destination.
+- Clue pages use `?scanner=open` to open the camera dialog and `?scanner=success` to show the success state.
+- Solution QR codes now point to the current clue's success route instead of directly to the next clue.
 - The QR sheet uses the current request host instead of a stored base URL.
 - If the content model, routes, or theme system changes, update this README and `AGENTS.md` in the same change.

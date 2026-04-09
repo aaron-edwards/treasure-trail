@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 
 import { QrPrintCard } from "@/components/qr-print-card";
-import { getNextStep, getSteps, getStepUrl } from "@/lib/hunt";
+import { getStepScannerUrl, getSteps } from "@/lib/hunt";
 import { getStepBuddyVariant, getThemeBuddyArt } from "@/lib/themes";
 
 function getRequestOrigin(headerList: Headers) {
@@ -33,8 +33,6 @@ export default async function QrHelperPage() {
         />
 
         {steps.map((step, index) => {
-          const nextStep = getNextStep(step.id);
-          const destination = nextStep ? getStepUrl(nextStep.id) : "/done";
           const buddyArt = getThemeBuddyArt(getStepBuddyVariant(index + 1));
 
           return (
@@ -43,7 +41,7 @@ export default async function QrHelperPage() {
               badgeSrc={buddyArt.src}
               key={step.id}
               title={`Solution ${index + 1}`}
-              value={`${origin}${destination}`}
+              value={`${origin}${getStepScannerUrl(step.id, "success")}`}
             />
           );
         })}

@@ -7,6 +7,7 @@ import {
   getNextStep,
   getStep,
   getStepIndex,
+  getStepScannerUrl,
   getSteps,
   getStepUrl,
 } from "@/lib/hunt";
@@ -15,10 +16,17 @@ type HuntStepPageProps = {
   params: Promise<{
     stepId: string;
   }>;
+  searchParams: Promise<{
+    scanner?: string | string[];
+  }>;
 };
 
-export default async function HuntStepPage({ params }: HuntStepPageProps) {
+export default async function HuntStepPage({
+  params,
+  searchParams,
+}: HuntStepPageProps) {
   const { stepId } = await params;
+  const resolvedSearchParams = await searchParams;
   const step = getStep(stepId);
 
   if (!step) {
@@ -28,7 +36,15 @@ export default async function HuntStepPage({ params }: HuntStepPageProps) {
   const allSteps = getSteps();
   const currentIndex = getStepIndex(step.id);
   const nextStep = getNextStep(step.id);
-  const expectedDestination = nextStep ? getStepUrl(nextStep.id) : "/done";
+  const scannerParam = Array.isArray(resolvedSearchParams.scanner)
+    ? resolvedSearchParams.scanner[0]
+    : resolvedSearchParams.scanner;
+  const initialMode =
+    scannerParam === "open" || scannerParam === "success"
+      ? scannerParam
+      : "closed";
+  const expectedDestination = getStepScannerUrl(step.id, "success");
+  const continueHref = nextStep ? getStepUrl(nextStep.id) : "/done";
   const continueLabel = nextStep ? "Open next clue" : "Celebrate";
   const successMessage = nextStep
     ? "That is the right QR."
@@ -43,6 +59,8 @@ export default async function HuntStepPage({ params }: HuntStepPageProps) {
           <ClueScannerDialog
             continueLabel={continueLabel}
             expectedDestination={expectedDestination}
+            initialMode={initialMode}
+            continueHref={continueHref}
             successMessage={successMessage}
           />
         }

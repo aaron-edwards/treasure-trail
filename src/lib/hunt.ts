@@ -2,6 +2,7 @@ import hunt from "@/content/hunt.json";
 
 export type HuntStep = (typeof hunt.steps)[number];
 export type HuntEvent = typeof hunt.event;
+export type ScannerState = "open" | "success";
 
 export function getHunt() {
   return hunt;
@@ -31,6 +32,10 @@ export function getNextStep(stepId: string) {
 
 export function getStepUrl(stepId: string) {
   return `/hunt/${stepId}`;
+}
+
+export function getStepScannerUrl(stepId: string, scannerState: ScannerState) {
+  return `${getStepUrl(stepId)}?scanner=${scannerState}`;
 }
 
 export function getAbsoluteStepUrl(stepId: string) {
