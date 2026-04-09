@@ -28,7 +28,6 @@
       "id": "question-1",
       "title": "The Tiny Sage's Secret",
       "eyebrow": "Clue one",
-      "locationHint": "A tiny sage with pointed palm and watchful eyes",
       "poem": [
         "Seek the tiny sage so wise,",
         "with pointed palm and watchful eyes.",
@@ -41,7 +40,6 @@
       "id": "question-2",
       "title": "Disco Reflection",
       "eyebrow": "Clue two",
-      "locationHint": "Where your face looks back with disco sparkle",
       "poem": [
         "Find where your face looks back at you,",
         "with disco sparkle shining through.",
@@ -54,7 +52,6 @@
       "id": "question-3",
       "title": "Under Gentle Cover",
       "eyebrow": "Clue three",
-      "locationHint": "Garden rows where summer sweetness grows",
       "poem": [
         "Step outside to garden rows,",
         "where summer sweetness softly grows.",
@@ -67,7 +64,6 @@
       "id": "question-4",
       "title": "The Staring Pair",
       "eyebrow": "Clue four",
-      "locationHint": "The biggest round eyes in the house",
       "poem": [
         "Big round eyes that never blink,",
         "watching snacks and every drink.",
@@ -80,7 +76,6 @@
       "id": "question-5",
       "title": "Reborn Sparkle",
       "eyebrow": "Clue five",
-      "locationHint": "Old trash reborn in gems and bright display",
       "poem": [
         "Find old trash reborn today,",
         "now dressed in gems and bright display.",
@@ -93,7 +88,6 @@
       "id": "question-6",
       "title": "The Little Hidden Door",
       "eyebrow": "Clue six",
-      "locationHint": "Where tiny doors in stumps appear",
       "poem": [
         "Where tiny doors in stumps appear,",
         "and fairy whispers hover near,",
@@ -106,7 +100,6 @@
       "id": "question-7",
       "title": "Bean's Golden Finale",
       "eyebrow": "Final clue",
-      "locationHint": "A gold remembrance of Bean",
       "poem": [
         "For many days at Bean's own place,",
         "we shared his couch and goofy face.",
