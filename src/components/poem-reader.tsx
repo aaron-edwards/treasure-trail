@@ -133,8 +133,12 @@ export function PoemReader({ lines, className }: PoemReaderProps) {
     }
 
     const attempt = () => {
-      speakLines(lines, selectedVoiceUri);
-      autoReadPathRef.current = pathname;
+      const spoke = speakLines(lines, selectedVoiceUri);
+
+      if (spoke) {
+        autoReadPathRef.current = pathname;
+        window.speechSynthesis?.removeEventListener("voiceschanged", attempt);
+      }
     };
 
     const timeoutId = window.setTimeout(attempt, 180);

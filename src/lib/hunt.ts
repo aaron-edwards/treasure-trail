@@ -37,11 +37,3 @@ export function getStepUrl(stepId: string) {
 export function getStepScannerUrl(stepId: string, scannerState: ScannerState) {
   return `${getStepUrl(stepId)}?scanner=${scannerState}`;
 }
-
-export function getAbsoluteStepUrl(stepId: string) {
-  return `${hunt.event.qrBaseUrl}${getStepUrl(stepId)}`;
-}
-
-export function getAbsoluteDoneUrl() {
-  return `${hunt.event.qrBaseUrl}/done`;
-}

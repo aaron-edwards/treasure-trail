@@ -26,7 +26,7 @@ const SpeechSettingsContext = createContext<SpeechSettingsContextValue | null>(
 );
 
 export function SpeechSettingsProvider({ children }: { children: ReactNode }) {
-  const [autoRead, setAutoReadState] = useState(true);
+  const [autoRead, setAutoReadState] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [selectedVoiceUri, setSelectedVoiceUriState] = useState<string | null>(
     null,

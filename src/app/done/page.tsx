@@ -28,7 +28,12 @@ export default function DonePage() {
             </h1>
             <div className="mx-auto max-w-2xl space-y-2 font-serif text-2xl leading-9 text-[color:var(--foreground)]">
               {hunt.event.celebrationPoem.map((line) => (
-                <p key={line}>{line}</p>
+                <p
+                  className="whitespace-nowrap sm:whitespace-normal"
+                  key={line}
+                >
+                  {line}
+                </p>
               ))}
             </div>
           </div>

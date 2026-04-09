@@ -98,8 +98,8 @@ export function SiteHeader() {
                 <Switch
                   aria-label="Toggle automatic reading"
                   checked={autoRead}
-                  onClick={() => {
-                    setAutoRead(!autoRead);
+                  onCheckedChange={(checked) => {
+                    setAutoRead(checked);
                   }}
                 />
               </div>

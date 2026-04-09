@@ -27,7 +27,9 @@ export function PoemCard({ step, readerButton, scannerButton }: PoemCardProps) {
         <div className="rounded-[24px] border border-dashed border-[color:var(--border-strong)] bg-[color:var(--paper)] px-4 py-5 shadow-inner sm:rounded-[28px] sm:px-6 sm:py-7">
           <div className="space-y-2 font-serif text-[1.08rem] leading-8 tracking-[-0.01em] text-[color:var(--foreground)] sm:space-y-3 sm:text-2xl sm:leading-10 sm:tracking-normal">
             {step.poem.map((line) => (
-              <p key={line}>{line}</p>
+              <p className="whitespace-nowrap sm:whitespace-normal" key={line}>
+                {line}
+              </p>
             ))}
           </div>
         </div>

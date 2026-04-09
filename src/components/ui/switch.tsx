@@ -7,12 +7,15 @@ type SwitchProps = Omit<
   "onChange"
 > & {
   checked: boolean;
+  onCheckedChange?: (checked: boolean) => void;
 };
 
 export function Switch({
   checked,
   className,
   disabled,
+  onCheckedChange,
+  onClick,
   ...props
 }: SwitchProps) {
   return (
@@ -26,9 +29,16 @@ export function Switch({
         className,
       )}
       disabled={disabled}
+      onClick={(event) => {
+        onClick?.(event);
+
+        if (!event.defaultPrevented && !disabled) {
+          onCheckedChange?.(!checked);
+        }
+      }}
       role="switch"
-      type="button"
       {...props}
+      type="button"
     >
       <span
         className={cn(
