@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/site-header";
+import { SpeechSettingsProvider } from "@/components/speech-settings";
 import { getHunt } from "@/lib/hunt";
 
 import "./globals.css";
@@ -20,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="min-h-screen pb-16">
-          <SiteHeader />
-          {children}
-        </div>
+        <SpeechSettingsProvider>
+          <div className="min-h-screen pb-16">
+            <SiteHeader />
+            {children}
+          </div>
+        </SpeechSettingsProvider>
       </body>
     </html>
   );

@@ -3,6 +3,7 @@
 import { Volume2 } from "lucide-react";
 import { useEffect } from "react";
 
+import { useSpeechSettings } from "@/components/speech-settings";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -11,7 +12,20 @@ type PoemReaderProps = {
   className?: string;
 };
 
-function getPreferredVoice(voices: SpeechSynthesisVoice[]) {
+function getPreferredVoice(
+  voices: SpeechSynthesisVoice[],
+  selectedVoiceUri: string | null,
+) {
+  if (selectedVoiceUri) {
+    const selectedVoice = voices.find(
+      (voice) => voice.voiceURI === selectedVoiceUri,
+    );
+
+    if (selectedVoice) {
+      return selectedVoice;
+    }
+  }
+
   return (
     voices.find(
       (voice) =>
@@ -24,7 +38,7 @@ function getPreferredVoice(voices: SpeechSynthesisVoice[]) {
   );
 }
 
-function speakLines(lines: string[]) {
+function speakLines(lines: string[], selectedVoiceUri: string | null) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) {
     console.info("[speech] browser support: unavailable");
     return false;
@@ -42,7 +56,7 @@ function speakLines(lines: string[]) {
   synthesis.cancel();
 
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 0.80;
+  utterance.rate = 0.8;
   utterance.pitch = 1.05;
   utterance.volume = 1;
 
@@ -57,7 +71,7 @@ function speakLines(lines: string[]) {
     })),
   });
 
-  const preferredVoice = getPreferredVoice(voices);
+  const preferredVoice = getPreferredVoice(voices, selectedVoiceUri);
 
   if (preferredVoice) {
     utterance.voice = preferredVoice;
@@ -104,19 +118,26 @@ function speakLines(lines: string[]) {
 }
 
 export function PoemReader({ lines, className }: PoemReaderProps) {
+  const { autoRead, isReady, selectedVoiceUri } = useSpeechSettings();
+
   useEffect(() => {
+    if (!isReady || !autoRead) {
+      return;
+    }
+
     const attempt = () => {
-      speakLines(lines);
+      speakLines(lines, selectedVoiceUri);
     };
 
-    attempt();
+    const timeoutId = window.setTimeout(attempt, 180);
     window.speechSynthesis?.addEventListener("voiceschanged", attempt);
 
     return () => {
+      window.clearTimeout(timeoutId);
       window.speechSynthesis?.removeEventListener("voiceschanged", attempt);
       window.speechSynthesis?.cancel();
     };
-  }, [lines]);
+  }, [autoRead, isReady, lines, selectedVoiceUri]);
 
   return (
     <button
@@ -129,7 +150,7 @@ export function PoemReader({ lines, className }: PoemReaderProps) {
         className,
       )}
       onClick={() => {
-        speakLines(lines);
+        speakLines(lines, selectedVoiceUri);
       }}
       type="button"
     >

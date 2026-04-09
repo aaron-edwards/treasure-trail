@@ -49,7 +49,7 @@ Unicorn artwork lives in:
 - The home and clue pages are optimized for mobile-first use during an actual scavenger hunt.
 - Clue pages use `?scanner=open` to open the camera dialog and `?scanner=success` to show the success state.
 - Solution QR codes now point to the current clue's success route instead of directly to the next clue.
-- Voiceover uses the browser `speechSynthesis` API in a simple self-contained reader component modeled after the earlier app.
-- Poem screens attempt to auto-read on load and also provide a manual `Read aloud` button.
+- Voiceover uses the browser `speechSynthesis` API with a manual reread button, optional auto-read, and menu-based voice selection stored in session storage.
+- The default voice behavior prefers `Karen`, then other `en-AU`, then English voices when no explicit voice is selected.
 - The QR sheet uses the current request host instead of a stored base URL.
 - If the content model, routes, or theme system changes, update this README and `AGENTS.md` in the same change.

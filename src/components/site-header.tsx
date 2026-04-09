@@ -1,9 +1,10 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { Menu, QrCode, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { useSpeechSettings } from "@/components/speech-settings";
 import {
   Sheet,
   SheetClose,
@@ -12,9 +13,29 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Switch } from "@/components/ui/switch";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const {
+    autoRead,
+    selectedVoiceUri,
+    setAutoRead,
+    setSelectedVoiceUri,
+    voices,
+  } = useSpeechSettings();
+  const sortedVoices = [...voices].sort((left, right) => {
+    const leftIsEnglish = left.lang.toLowerCase().startsWith("en");
+    const rightIsEnglish = right.lang.toLowerCase().startsWith("en");
+
+    if (leftIsEnglish !== rightIsEnglish) {
+      return leftIsEnglish ? -1 : 1;
+    }
+
+    return (
+      left.lang.localeCompare(right.lang) || left.name.localeCompare(right.name)
+    );
+  });
 
   if (pathname.startsWith("/dev/qrs")) {
     return null;
@@ -62,13 +83,64 @@ export function SiteHeader() {
             </SheetClose>
           </SheetHeader>
 
-          <nav className="flex flex-col gap-3 px-5 pb-5 pt-2">
-            <Link
-              className="text-lg font-semibold text-[color:var(--foreground)] underline-offset-4 transition-colors hover:text-[color:var(--accent-ink)] hover:underline"
-              href="/dev/qrs"
-            >
-              QR sheet
-            </Link>
+          <nav className="flex flex-col gap-6 px-5 pb-5 pt-3">
+            <section className="rounded-[24px] border border-white/70 bg-white/72 p-4 shadow-[0_12px_30px_rgba(77,56,115,0.08)]">
+              <div className="flex items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <p className="text-sm font-semibold text-[color:var(--foreground)]">
+                    Auto read
+                  </p>
+                  <p className="text-xs leading-4 text-[color:var(--muted-foreground)] sm:text-sm sm:leading-5">
+                    Read each poem aloud when a page opens.
+                  </p>
+                </div>
+
+                <Switch
+                  aria-label="Toggle automatic reading"
+                  checked={autoRead}
+                  onClick={() => {
+                    setAutoRead(!autoRead);
+                  }}
+                />
+              </div>
+
+              <div className="mt-4 space-y-2">
+                <label
+                  className="text-sm font-semibold text-[color:var(--foreground)]"
+                  htmlFor="voice-select"
+                >
+                  Voice
+                </label>
+                <select
+                  className="h-11 w-full rounded-2xl border border-white/80 bg-white/90 px-4 text-sm text-[color:var(--foreground)] shadow-inner outline-none focus-visible:ring-4 focus-visible:ring-[color:var(--ring-soft)]"
+                  id="voice-select"
+                  onChange={(event) => {
+                    setSelectedVoiceUri(event.target.value || null);
+                  }}
+                  value={selectedVoiceUri ?? ""}
+                >
+                  <option value="">Karen / AU fallback</option>
+                  {sortedVoices.map((voice) => (
+                    <option
+                      key={`${voice.name}-${voice.lang}-${voice.voiceURI}`}
+                      value={voice.voiceURI}
+                    >
+                      {voice.name} ({voice.lang})
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </section>
+
+            <div className="px-1">
+              <Link
+                className="inline-flex items-center gap-3 text-base font-semibold text-[color:var(--foreground)] underline-offset-4 transition-colors hover:text-[color:var(--accent-ink)] hover:underline"
+                href="/dev/qrs"
+              >
+                <QrCode className="h-4 w-4 text-[color:var(--muted-foreground)]" />
+                QR sheet
+              </Link>
+            </div>
           </nav>
         </SheetContent>
       </Sheet>
