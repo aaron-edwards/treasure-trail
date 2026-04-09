@@ -7,10 +7,11 @@ import { getStepIndex } from "@/lib/hunt";
 
 type PoemCardProps = {
   step: HuntStep;
+  readerButton?: ReactNode;
   scannerButton?: ReactNode;
 };
 
-export function PoemCard({ step, scannerButton }: PoemCardProps) {
+export function PoemCard({ step, readerButton, scannerButton }: PoemCardProps) {
   const stepNumber = getStepIndex(step.id) + 1;
 
   return (
@@ -30,6 +31,10 @@ export function PoemCard({ step, scannerButton }: PoemCardProps) {
             ))}
           </div>
         </div>
+
+        {readerButton ? (
+          <div className="flex justify-center">{readerButton}</div>
+        ) : null}
 
         <ThemeBuddy imageOnly stepNumber={stepNumber} message="" />
 

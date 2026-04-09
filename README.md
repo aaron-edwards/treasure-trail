@@ -8,9 +8,9 @@ The app is currently configured from a single JSON file and is designed so that 
 
 Current experience:
 
-- `/` landing page with the intro poem and Bubbles the unicorn
-- `/hunt/[stepId]` clue pages with poem clues, buddy art, and URL-driven scanner states
-- `/done` finale page
+- `/` landing page with the intro poem, Bubbles the unicorn, and a simple browser read-aloud button
+- `/hunt/[stepId]` clue pages with poem clues, buddy art, URL-driven scanner states, and a simple browser read-aloud button
+- `/done` finale page with a simple browser read-aloud button
 - `/dev/qrs` printable QR sheet that uses the current host automatically
 
 ## Commands
@@ -49,5 +49,7 @@ Unicorn artwork lives in:
 - The home and clue pages are optimized for mobile-first use during an actual scavenger hunt.
 - Clue pages use `?scanner=open` to open the camera dialog and `?scanner=success` to show the success state.
 - Solution QR codes now point to the current clue's success route instead of directly to the next clue.
+- Voiceover uses the browser `speechSynthesis` API in a simple self-contained reader component modeled after the earlier app.
+- Poem screens attempt to auto-read on load and also provide a manual `Read aloud` button.
 - The QR sheet uses the current request host instead of a stored base URL.
 - If the content model, routes, or theme system changes, update this README and `AGENTS.md` in the same change.

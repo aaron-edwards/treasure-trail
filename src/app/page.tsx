@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { PoemReader } from "@/components/poem-reader";
 import { ThemeBuddy } from "@/components/theme-buddy";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -41,6 +42,10 @@ export default function HomePage() {
               message="Bubbles is ready to trot beside you."
               variant="intro"
             />
+
+            <div className="flex justify-center">
+              <PoemReader lines={hunt.event.introPoem} />
+            </div>
 
             <div className="flex justify-center pt-0.5">
               <Link

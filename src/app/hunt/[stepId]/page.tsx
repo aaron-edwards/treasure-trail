@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 
 import { ClueScannerDialog } from "@/components/clue-scanner-dialog";
 import { PoemCard } from "@/components/poem-card";
+import { PoemReader } from "@/components/poem-reader";
 import { StepProgress } from "@/components/step-progress";
 import {
   getNextStep,
@@ -55,6 +56,7 @@ export default async function HuntStepPage({
       <StepProgress currentIndex={currentIndex} total={allSteps.length} />
 
       <PoemCard
+        readerButton={<PoemReader lines={step.poem} />}
         scannerButton={
           <ClueScannerDialog
             continueLabel={continueLabel}

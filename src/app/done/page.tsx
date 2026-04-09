@@ -1,6 +1,7 @@
 import { Gift, Sparkles } from "lucide-react";
 import Link from "next/link";
 
+import { PoemReader } from "@/components/poem-reader";
 import { ThemeBuddy } from "@/components/theme-buddy";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,6 +31,9 @@ export default function DonePage() {
                 <p key={line}>{line}</p>
               ))}
             </div>
+          </div>
+          <div className="relative flex justify-center">
+            <PoemReader lines={hunt.event.celebrationPoem} />
           </div>
           <div className="relative flex justify-center">
             <Link href="/">
