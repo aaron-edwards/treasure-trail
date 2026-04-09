@@ -1,4 +1,3 @@
-import { Gift, Sparkles } from "lucide-react";
 import Link from "next/link";
 
 import { PoemReader } from "@/components/poem-reader";
@@ -13,50 +12,52 @@ export default function DonePage() {
   const doneSpeechUrl = getDoneSpeechUrl();
 
   return (
-    <main className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-8 sm:px-6 sm:py-10">
-      <Card className="overflow-hidden bg-[linear-gradient(180deg,rgba(255,245,248,0.98),rgba(255,255,255,0.88))]">
-        <CardContent className="relative space-y-6 py-10 sm:py-14">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.88),transparent_54%)]" />
-          <div className="relative mx-auto grid h-20 w-20 place-items-center rounded-full bg-[linear-gradient(135deg,var(--primary),var(--primary-2))] text-white shadow-[0_20px_50px_rgba(232,85,108,0.25)]">
-            <Gift className="h-9 w-9" />
-          </div>
-          <div className="relative space-y-4 text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.32em] text-[color:var(--muted-foreground)]">
-              <Sparkles className="mr-2 inline h-4 w-4" />
+    <main className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-5 sm:px-6 sm:py-10">
+      <Card className="overflow-hidden">
+        <CardContent className="relative space-y-4 p-4 sm:space-y-6 sm:p-8">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.9),transparent_70%)]" />
+          <div className="relative space-y-2.5 sm:space-y-3">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[color:var(--muted-foreground)] sm:text-sm sm:tracking-[0.32em]">
               {hunt.event.celebrationEyebrow}
             </p>
-            <h1 className="font-serif text-5xl text-[color:var(--foreground)] sm:text-6xl">
+            <h1 className="max-w-3xl font-serif text-3xl leading-tight text-[color:var(--foreground)] sm:text-5xl">
               {hunt.event.celebrationTitle}
             </h1>
-            <div className="mx-auto max-w-2xl space-y-2 font-serif text-2xl leading-9 text-[color:var(--foreground)]">
-              {hunt.event.celebrationPoem.map((line) => (
-                <p
-                  className="whitespace-nowrap sm:whitespace-normal"
-                  key={line}
-                >
-                  {line}
-                </p>
-              ))}
+            <div className="max-w-2xl rounded-[24px] border border-dashed border-[color:var(--border-strong)] bg-[color:var(--paper)] px-4 py-5 shadow-inner sm:rounded-[28px] sm:px-6 sm:py-7">
+              <div className="space-y-2 font-serif text-[1.08rem] leading-8 tracking-[-0.01em] text-[color:var(--foreground)] sm:space-y-3 sm:text-2xl sm:leading-10 sm:tracking-normal">
+                {hunt.event.celebrationPoem.map((line) => (
+                  <p
+                    className="whitespace-nowrap sm:whitespace-normal"
+                    key={line}
+                  >
+                    {line}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
-          <div className="relative flex justify-center">
+
+          <ThemeBuddy
+            message="Bubbles is here for one last burst of confetti, sparkle, and birthday cheer."
+            variant="celebration"
+          />
+
+          <div className="flex justify-center">
             <PoemReader
               audioSrc={doneSpeechUrl ?? undefined}
               lines={hunt.event.celebrationPoem}
             />
           </div>
-          <div className="relative flex justify-center">
-            <Link href="/">
-              <Button size="lg">Start again</Button>
+
+          <div className="flex justify-center pt-0.5">
+            <Link className="block w-full sm:w-auto" href="/">
+              <Button className="w-full sm:w-auto" size="lg">
+                Start Again
+              </Button>
             </Link>
           </div>
         </CardContent>
       </Card>
-
-      <ThemeBuddy
-        message="You did it. Confetti hoof-kicks, sparkles, and triumphant birthday prancing all around."
-        variant="celebration"
-      />
     </main>
   );
 }

@@ -13,13 +13,13 @@
     ],
     "startStepId": "question-1",
     "startLabel": "Begin The Trail",
-    "celebrationEyebrow": "Ta-Da",
-    "celebrationTitle": "The final verse has led you here",
+    "celebrationEyebrow": "Hooray",
+    "celebrationTitle": "Treasure Trail Complete",
     "celebrationPoem": [
       "You followed each rhyme from clue to clue,",
       "and now the sparkly trail is through.",
-      "Your final surprise belongs right here,",
-      "with happy hearts and unicorn cheer."
+      "Each little gift along the way,",
+      "made birthday magic bright today."
     ]
   },
   "steps": [
