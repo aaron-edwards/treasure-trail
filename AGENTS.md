@@ -24,11 +24,11 @@ When changing the content model, routes, theme structure, or important workflows
 ## Main Routes
 
 - `/`
-  - Intro screen with the opening poem, Bubbles, and a simple browser read-aloud button
+  - Intro screen with the opening poem, Bubbles, and browser read-aloud
 - `/hunt/[stepId]`
-  - Individual clue screen with URL-driven scanner dialog states and a simple browser read-aloud button
+  - Individual clue screen with URL-driven scanner dialog states and browser read-aloud
 - `/done`
-  - Celebration/finale screen with a simple browser read-aloud button
+  - Celebration/finale screen with browser read-aloud
 - `/dev/qrs`
   - Print-first QR sheet for the current host
 
@@ -40,7 +40,7 @@ When changing the content model, routes, theme structure, or important workflows
 - Keep the home screen and clue screens visually related.
 - Bubbles should feel like a supporting visual character, not a noisy decoration.
 - The scanner flow should use route/query state where practical, validate the expected success URL for the current clue, and clearly signal success or incorrect scans.
-- Voiceover should stay simple and close to the earlier present-hunt implementation.
+- Voiceover should stay simple and close to the earlier present-hunt implementation, with best-effort auto-read plus a manual reread button.
 - The QR sheet should stay easy to print and avoid unnecessary explanatory UI.
 
 ## Content Rules

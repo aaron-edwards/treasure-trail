@@ -8,9 +8,9 @@ The app is currently configured from a single JSON file and is designed so that 
 
 Current experience:
 
-- `/` landing page with the intro poem, Bubbles the unicorn, and a simple browser read-aloud button
-- `/hunt/[stepId]` clue pages with poem clues, buddy art, URL-driven scanner states, and a simple browser read-aloud button
-- `/done` finale page with a simple browser read-aloud button
+- `/` landing page with the intro poem, Bubbles the unicorn, and browser read-aloud
+- `/hunt/[stepId]` clue pages with poem clues, buddy art, URL-driven scanner states, and browser read-aloud
+- `/done` finale page with browser read-aloud
 - `/dev/qrs` printable QR sheet that uses the current host automatically
 
 ## Commands

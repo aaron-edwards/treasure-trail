@@ -11,6 +11,19 @@ type PoemReaderProps = {
   className?: string;
 };
 
+function getPreferredVoice(voices: SpeechSynthesisVoice[]) {
+  return (
+    voices.find(
+      (voice) =>
+        voice.name.toLowerCase().includes("karen") &&
+        voice.lang.toLowerCase() === "en-au",
+    ) ??
+    voices.find((voice) => voice.lang.toLowerCase() === "en-au") ??
+    voices.find((voice) => voice.lang.toLowerCase().startsWith("en")) ??
+    null
+  );
+}
+
 function speakLines(lines: string[]) {
   if (typeof window === "undefined" || !("speechSynthesis" in window)) {
     console.info("[speech] browser support: unavailable");
@@ -44,11 +57,7 @@ function speakLines(lines: string[]) {
     })),
   });
 
-  const preferredVoice =
-    voices.find((voice) => voice.default) ??
-    voices.find((voice) => voice.lang.toLowerCase() === "en-au") ??
-    voices.find((voice) => voice.lang.toLowerCase().startsWith("en")) ??
-    null;
+  const preferredVoice = getPreferredVoice(voices);
 
   if (preferredVoice) {
     utterance.voice = preferredVoice;
