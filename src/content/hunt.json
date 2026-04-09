@@ -99,7 +99,7 @@
     {
       "id": "question-7",
       "title": "Bean's Golden Finale",
-      "eyebrow": "Final clue",
+      "eyebrow": "Clue seven",
       "poem": [
         "For many days at Bean's own place,",
         "we shared his couch and goofy face.",
@@ -107,6 +107,18 @@
         "now find him in gold to end this game."
       ],
       "note": "Look near the gold statue of Pinto Bean."
+    },
+    {
+      "id": "question-8",
+      "title": "Placeholder Clue Eight",
+      "eyebrow": "Final clue",
+      "poem": [
+        "This is a placeholder stop for now,",
+        "to mark where clue eight takes a bow.",
+        "Swap in your real poetic trail,",
+        "when your final hidden verse sets sail."
+      ],
+      "note": "Temporary placeholder clue for the eighth QR card."
     }
   ]
 }

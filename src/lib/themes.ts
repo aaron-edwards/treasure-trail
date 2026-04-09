@@ -9,7 +9,8 @@ export type ThemeBuddyVariant =
   | "step4"
   | "step5"
   | "step6"
-  | "step7";
+  | "step7"
+  | "step8";
 
 export type ThemeDefinition = {
   id: string;
@@ -48,28 +49,32 @@ const themes: Record<string, ThemeDefinition> = {
         src: "/media/unicorns/unicorn-1.png",
       },
       step2: {
-        alt: "A whimsical unicorn buddy carrying flowers.",
+        alt: "A whimsical unicorn buddy surfing a splashy wave.",
         src: "/media/unicorns/unicorn-2.png",
       },
       step3: {
-        alt: "A whimsical unicorn buddy painting a rainbow.",
+        alt: "A whimsical unicorn buddy carrying flowers.",
         src: "/media/unicorns/unicorn-3.png",
       },
       step4: {
-        alt: "A whimsical unicorn buddy driving a racecar.",
+        alt: "A whimsical unicorn buddy painting a rainbow.",
         src: "/media/unicorns/unicorn-4.png",
       },
       step5: {
-        alt: "A whimsical unicorn buddy eating a frosted donut.",
+        alt: "A whimsical unicorn buddy driving a racecar.",
         src: "/media/unicorns/unicorn-5.png",
       },
       step6: {
-        alt: "A whimsical unicorn buddy blowing bubbles.",
+        alt: "A whimsical unicorn buddy eating a frosted donut.",
         src: "/media/unicorns/unicorn-6.png",
       },
       step7: {
-        alt: "A whimsical unicorn buddy dressed as a birthday wizard.",
+        alt: "A whimsical unicorn buddy blowing bubbles.",
         src: "/media/unicorns/unicorn-7.png",
+      },
+      step8: {
+        alt: "A whimsical unicorn buddy dressed as a birthday wizard.",
+        src: "/media/unicorns/unicorn-8.png",
       },
     },
   },
@@ -82,7 +87,7 @@ export function getActiveTheme() {
 }
 
 export function getStepBuddyVariant(stepNumber: number): ThemeBuddyVariant {
-  const clampedStepNumber = Math.max(1, Math.min(7, stepNumber));
+  const clampedStepNumber = Math.max(1, Math.min(8, stepNumber));
 
   return `step${clampedStepNumber}` as ThemeBuddyVariant;
 }
