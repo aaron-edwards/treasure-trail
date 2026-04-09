@@ -25,7 +25,7 @@
   "steps": [
     {
       "id": "question-1",
-      "title": "The Tiny Sage's Secret",
+      "title": "Riddle 1",
       "eyebrow": "Clue one",
       "poem": [
         "Seek the tiny sage so wise,",
@@ -37,7 +37,7 @@
     },
     {
       "id": "question-2",
-      "title": "Disco Reflection",
+      "title": "Riddle 2",
       "eyebrow": "Clue two",
       "poem": [
         "Find where your face looks back at you,",
@@ -49,7 +49,7 @@
     },
     {
       "id": "question-3",
-      "title": "Under Gentle Cover",
+      "title": "Riddle 3",
       "eyebrow": "Clue three",
       "poem": [
         "Step outside to garden rows,",
@@ -61,7 +61,7 @@
     },
     {
       "id": "question-4",
-      "title": "The Staring Pair",
+      "title": "Riddle 4",
       "eyebrow": "Clue four",
       "poem": [
         "Big round eyes that never blink,",
@@ -73,7 +73,7 @@
     },
     {
       "id": "question-5",
-      "title": "Reborn Sparkle",
+      "title": "Riddle 5",
       "eyebrow": "Clue five",
       "poem": [
         "Find old trash reborn today,",
@@ -85,7 +85,7 @@
     },
     {
       "id": "question-6",
-      "title": "The Little Hidden Door",
+      "title": "Riddle 6",
       "eyebrow": "Clue six",
       "poem": [
         "Where tiny doors in stumps appear,",
@@ -97,27 +97,27 @@
     },
     {
       "id": "question-7",
-      "title": "Bean's Golden Finale",
+      "title": "Riddle 7",
       "eyebrow": "Clue seven",
       "poem": [
         "For many days at Bean's own place,",
         "we shared his couch and goofy face.",
         "One runny day became household fame,",
-        "now find him in gold to end this game."
+        "now find him in gold to continue the game."
       ],
       "note": "Look near the gold statue of Pinto Bean."
     },
     {
       "id": "question-8",
-      "title": "Placeholder Clue Eight",
+      "title": "Riddle 8",
       "eyebrow": "Final clue",
       "poem": [
-        "This is a placeholder stop for now,",
-        "to mark where clue eight takes a bow.",
-        "Swap in your real poetic trail,",
-        "when your final hidden verse sets sail."
+        "Find the helper not too sleek,",
+        "who bumps about with cheerful squeak.",
+        "A little clumsy, dear, and sweet,",
+        "your final clue is by his seat."
       ],
-      "note": "Temporary placeholder clue for the eighth QR card."
+      "note": "Look near your first robovac, Dustin von Robovac."
     }
   ]
 }
