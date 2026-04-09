@@ -11,6 +11,7 @@
     "format": "biome format --write src package.json tsconfig.json next.config.ts postcss.config.mjs components.json biome.json README.md .gitignore"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.542.0",

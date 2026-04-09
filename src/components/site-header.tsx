@@ -1,6 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function SiteHeader() {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/dev/qrs")) {
+    return null;
+  }
+
   return (
     <header className="mx-auto flex w-full max-w-6xl items-center px-4 pt-6 sm:px-6">
       <Link

@@ -1,11 +1,17 @@
-import { ArrowLeft, ScanQrCode } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { ClueScannerDialog } from "@/components/clue-scanner-dialog";
 import { PoemCard } from "@/components/poem-card";
 import { StepProgress } from "@/components/step-progress";
-import { Button } from "@/components/ui/button";
-import { getStep, getStepIndex, getSteps } from "@/lib/hunt";
+import {
+  getNextStep,
+  getStep,
+  getStepIndex,
+  getSteps,
+  getStepUrl,
+} from "@/lib/hunt";
 
 type HuntStepPageProps = {
   params: Promise<{
@@ -23,6 +29,12 @@ export default async function HuntStepPage({ params }: HuntStepPageProps) {
 
   const allSteps = getSteps();
   const currentIndex = getStepIndex(step.id);
+  const nextStep = getNextStep(step.id);
+  const expectedDestination = nextStep ? getStepUrl(nextStep.id) : "/done";
+  const continueLabel = nextStep ? "Open next clue" : "Celebrate";
+  const successMessage = nextStep
+    ? "That is the right QR."
+    : "That is the final QR.";
 
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-col gap-4 px-4 py-5 sm:gap-6 sm:px-6 sm:py-10">
@@ -39,10 +51,11 @@ export default async function HuntStepPage({ params }: HuntStepPageProps) {
 
       <PoemCard
         scannerButton={
-          <Button className="w-full sm:w-auto" size="lg" type="button">
-            <ScanQrCode className="h-4 w-4" />
-            Open scanner
-          </Button>
+          <ClueScannerDialog
+            continueLabel={continueLabel}
+            expectedDestination={expectedDestination}
+            successMessage={successMessage}
+          />
         }
         step={step}
       />

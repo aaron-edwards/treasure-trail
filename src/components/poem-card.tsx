@@ -3,19 +3,15 @@ import type { ReactNode } from "react";
 import { ThemeBuddy } from "@/components/theme-buddy";
 import { Card, CardContent } from "@/components/ui/card";
 import type { HuntStep } from "@/lib/hunt";
-import { getStepIndex, getSteps } from "@/lib/hunt";
+import { getStepIndex } from "@/lib/hunt";
 
 type PoemCardProps = {
   step: HuntStep;
   scannerButton?: ReactNode;
 };
 
-export function PoemCard({
-  step,
-  scannerButton,
-}: PoemCardProps) {
+export function PoemCard({ step, scannerButton }: PoemCardProps) {
   const stepNumber = getStepIndex(step.id) + 1;
-  const totalSteps = getSteps().length;
 
   return (
     <Card className="relative overflow-hidden">
@@ -35,11 +31,7 @@ export function PoemCard({
           </div>
         </div>
 
-        <ThemeBuddy
-          imageOnly
-          stepNumber={stepNumber}
-          message=""
-        />
+        <ThemeBuddy imageOnly stepNumber={stepNumber} message="" />
 
         {scannerButton ? (
           <div className="flex justify-center pt-0.5">{scannerButton}</div>

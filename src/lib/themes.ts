@@ -86,3 +86,7 @@ export function getStepBuddyVariant(stepNumber: number): ThemeBuddyVariant {
 
   return `step${clampedStepNumber}` as ThemeBuddyVariant;
 }
+
+export function getThemeBuddyArt(variant: ThemeBuddyVariant) {
+  return getActiveTheme().buddyArt[variant];
+}

@@ -9,9 +9,9 @@ The app is currently configured from a single JSON file and is designed so that 
 Current experience:
 
 - `/` landing page with the intro poem and Bubbles the unicorn
-- `/hunt/[stepId]` clue pages with poem clues, buddy art, and a placeholder scanner button
+- `/hunt/[stepId]` clue pages with poem clues, buddy art, and an in-app QR scanner dialog
 - `/done` finale page
-- `/dev/qrs` printable QR helper page for generating next-step links
+- `/dev/qrs` printable QR sheet that uses the current host automatically
 
 ## Commands
 
@@ -30,7 +30,7 @@ Edit [`src/content/hunt.json`](./src/content/hunt.json) to change:
 - theme selection
 - start button label
 - clue titles and poem lines
-- QR base URL used by the printable QR helper
+- event copy, theme selection, and clue order
 
 The JSON file is the current source of truth for the hunt flow.
 
@@ -47,5 +47,6 @@ Unicorn artwork lives in:
 ## Project Notes
 
 - The home and clue pages are optimized for mobile-first use during an actual scavenger hunt.
-- The scanner button on clue pages is intentionally a placeholder for now.
+- Clue pages now include an in-app QR scanner dialog that validates the next expected destination.
+- The QR sheet uses the current request host instead of a stored base URL.
 - If the content model, routes, or theme system changes, update this README and `AGENTS.md` in the same change.

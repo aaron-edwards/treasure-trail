@@ -26,11 +26,11 @@ When changing the content model, routes, theme structure, or important workflows
 - `/`
   - Intro screen with the opening poem and Bubbles
 - `/hunt/[stepId]`
-  - Individual clue screen
+  - Individual clue screen with in-app scanner dialog
 - `/done`
   - Celebration/finale screen
 - `/dev/qrs`
-  - QR helper page for printable next-step links
+  - Print-first QR sheet for the current host
 
 ## UI Intent
 
@@ -39,6 +39,8 @@ When changing the content model, routes, theme structure, or important workflows
 - Avoid adding builder-facing copy to participant-facing screens unless explicitly requested.
 - Keep the home screen and clue screens visually related.
 - Bubbles should feel like a supporting visual character, not a noisy decoration.
+- The scanner flow should validate the expected next clue and clearly signal success or incorrect scans.
+- The QR sheet should stay easy to print and avoid unnecessary explanatory UI.
 
 ## Content Rules
 
