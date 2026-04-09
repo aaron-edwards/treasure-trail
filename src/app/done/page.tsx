@@ -6,9 +6,11 @@ import { ThemeBuddy } from "@/components/theme-buddy";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getHunt } from "@/lib/hunt";
+import { getDoneSpeechUrl } from "@/lib/speech";
 
 export default function DonePage() {
   const hunt = getHunt();
+  const doneSpeechUrl = getDoneSpeechUrl();
 
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-8 sm:px-6 sm:py-10">
@@ -38,7 +40,10 @@ export default function DonePage() {
             </div>
           </div>
           <div className="relative flex justify-center">
-            <PoemReader lines={hunt.event.celebrationPoem} />
+            <PoemReader
+              audioSrc={doneSpeechUrl ?? undefined}
+              lines={hunt.event.celebrationPoem}
+            />
           </div>
           <div className="relative flex justify-center">
             <Link href="/">

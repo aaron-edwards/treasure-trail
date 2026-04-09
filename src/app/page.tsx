@@ -5,9 +5,11 @@ import { ThemeBuddy } from "@/components/theme-buddy";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { getHunt, getStepUrl } from "@/lib/hunt";
+import { getIntroSpeechUrl } from "@/lib/speech";
 
 export default function HomePage() {
   const hunt = getHunt();
+  const introSpeechUrl = getIntroSpeechUrl();
 
   return (
     <main className="mx-auto flex w-full max-w-4xl flex-col gap-6 px-4 py-5 sm:px-6 sm:py-10">
@@ -44,7 +46,10 @@ export default function HomePage() {
             />
 
             <div className="flex justify-center">
-              <PoemReader lines={hunt.event.introPoem} />
+              <PoemReader
+                audioSrc={introSpeechUrl ?? undefined}
+                lines={hunt.event.introPoem}
+              />
             </div>
 
             <div className="flex justify-center pt-0.5">

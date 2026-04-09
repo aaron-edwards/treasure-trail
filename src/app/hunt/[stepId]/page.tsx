@@ -12,6 +12,7 @@ import {
   getSteps,
   getStepUrl,
 } from "@/lib/hunt";
+import { getStepSpeechUrl } from "@/lib/speech";
 
 type HuntStepPageProps = {
   params: Promise<{
@@ -37,6 +38,7 @@ export default async function HuntStepPage({
   const allSteps = getSteps();
   const currentIndex = getStepIndex(step.id);
   const nextStep = getNextStep(step.id);
+  const stepSpeechUrl = getStepSpeechUrl(step.id);
   const scannerParam = Array.isArray(resolvedSearchParams.scanner)
     ? resolvedSearchParams.scanner[0]
     : resolvedSearchParams.scanner;
@@ -56,7 +58,9 @@ export default async function HuntStepPage({
       <StepProgress currentIndex={currentIndex} total={allSteps.length} />
 
       <PoemCard
-        readerButton={<PoemReader lines={step.poem} />}
+        readerButton={
+          <PoemReader audioSrc={stepSpeechUrl ?? undefined} lines={step.poem} />
+        }
         scannerButton={
           <ClueScannerDialog
             continueLabel={continueLabel}

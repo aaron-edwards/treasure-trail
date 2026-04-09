@@ -5,6 +5,8 @@
   "packageManager": "pnpm@10.33.0",
   "scripts": {
     "dev": "next dev",
+    "speech:sync": "node scripts/sync-speech.mjs",
+    "prebuild": "pnpm speech:sync",
     "build": "next build",
     "start": "next start",
     "lint": "biome check src package.json tsconfig.json next.config.ts postcss.config.mjs components.json biome.json README.md .gitignore",
@@ -12,8 +14,11 @@
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-switch": "^1.2.6",
+    "@vercel/blob": "^2.3.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "google-auth-library": "^10.6.2",
     "lucide-react": "^0.542.0",
     "next": "^16.0.0",
     "react": "^19.1.1",

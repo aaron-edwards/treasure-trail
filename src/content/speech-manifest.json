@@ -1,0 +1,49 @@
+{
+  "audioEncoding": "WAV",
+  "event": {
+    "done": {
+      "hash": "aee907b7dd6bd20d",
+      "url": "https://outoosfcilwgvnmj.public.blob.vercel-storage.com/speech/done-aee907b7dd6bd20d.wav"
+    },
+    "intro": {
+      "hash": "f68727013b2f445d",
+      "url": "https://outoosfcilwgvnmj.public.blob.vercel-storage.com/speech/intro-f68727013b2f445d.wav"
+    }
+  },
+  "generatedAt": "2026-04-09T08:33:20.050Z",
+  "provider": "gemini",
+  "steps": {
+    "question-1": {
+      "hash": "6b17afdf6e95cc18",
+      "url": "https://outoosfcilwgvnmj.public.blob.vercel-storage.com/speech/question-1-6b17afdf6e95cc18.wav"
+    },
+    "question-2": {
+      "hash": "7b61c25726beaf2b",
+      "url": "https://outoosfcilwgvnmj.public.blob.vercel-storage.com/speech/question-2-7b61c25726beaf2b.wav"
+    },
+    "question-3": {
+      "hash": "66ccb1d93d0b7832",
+      "url": "https://outoosfcilwgvnmj.public.blob.vercel-storage.com/speech/question-3-66ccb1d93d0b7832.wav"
+    },
+    "question-4": {
+      "hash": "ffa2a0d122557c1e",
+      "url": "https://outoosfcilwgvnmj.public.blob.vercel-storage.com/speech/question-4-ffa2a0d122557c1e.wav"
+    },
+    "question-5": {
+      "hash": "250c474e72d88e03",
+      "url": "https://outoosfcilwgvnmj.public.blob.vercel-storage.com/speech/question-5-250c474e72d88e03.wav"
+    },
+    "question-6": {
+      "hash": "3639a8bbfc70c3b3",
+      "url": "https://outoosfcilwgvnmj.public.blob.vercel-storage.com/speech/question-6-3639a8bbfc70c3b3.wav"
+    },
+    "question-7": {
+      "hash": "3adf32776cf3f327",
+      "url": "https://outoosfcilwgvnmj.public.blob.vercel-storage.com/speech/question-7-3adf32776cf3f327.wav"
+    },
+    "question-8": {
+      "hash": "7f020485f81633bc",
+      "url": "https://outoosfcilwgvnmj.public.blob.vercel-storage.com/speech/question-8-7f020485f81633bc.wav"
+    }
+  }
+}

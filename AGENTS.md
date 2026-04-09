@@ -16,19 +16,21 @@ This repository contains `Treasure Trail`, a whimsical birthday scavenger hunt a
 ## Source Of Truth
 
 - Hunt content: `src/content/hunt.json`
+- Generated speech manifest: `src/content/speech-manifest.json`
 - Theme definitions and buddy artwork mapping: `src/lib/themes.ts`
 - Hunt helpers: `src/lib/hunt.ts`
+- Speech sync script: `scripts/sync-speech.mjs`
 
 When changing the content model, routes, theme structure, or important workflows, update both `README.md` and this file in the same change.
 
 ## Main Routes
 
 - `/`
-  - Intro screen with the opening poem, Bubbles, and browser read-aloud
+  - Intro screen with the opening poem, Bubbles, and read-aloud
 - `/hunt/[stepId]`
-  - Individual clue screen with URL-driven scanner dialog states and browser read-aloud
+  - Individual clue screen with URL-driven scanner dialog states and read-aloud
 - `/done`
-  - Celebration/finale screen with browser read-aloud
+  - Celebration/finale screen with read-aloud
 - `/dev/qrs`
   - Print-first QR sheet for the current host
 
@@ -40,7 +42,7 @@ When changing the content model, routes, theme structure, or important workflows
 - Keep the home screen and clue screens visually related.
 - Bubbles should feel like a supporting visual character, not a noisy decoration.
 - The scanner flow should use route/query state where practical, validate the expected success URL for the current clue, and clearly signal success or incorrect scans.
-- Voiceover should stay simple, but can use session-stored auto-read and selected voice settings exposed in the menu.
+- Voiceover should stay simple, prefer generated narration URLs from `speech-manifest.json` when available, use a verse-style generation prompt that preserves line cadence, and otherwise fall back to browser speech with session-stored auto-read and selected voice settings exposed in the menu.
 - The QR sheet should stay easy to print and avoid unnecessary explanatory UI.
 
 ## Content Rules

@@ -9,6 +9,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type PoemReaderProps = {
+  audioSrc?: string;
   lines: string[];
   className?: string;
 };
@@ -118,10 +119,57 @@ function speakLines(lines: string[], selectedVoiceUri: string | null) {
   return true;
 }
 
-export function PoemReader({ lines, className }: PoemReaderProps) {
+async function readPoem({
+  activeAudioRef,
+  audioSrc,
+  lines,
+  selectedVoiceUri,
+}: {
+  activeAudioRef: { current: HTMLAudioElement | null };
+  audioSrc?: string;
+  lines: string[];
+  selectedVoiceUri: string | null;
+}) {
+  if (activeAudioRef.current) {
+    activeAudioRef.current.pause();
+    activeAudioRef.current.currentTime = 0;
+    activeAudioRef.current = null;
+  }
+
+  if (audioSrc && typeof window !== "undefined") {
+    const audio = new Audio(audioSrc);
+    audio.preload = "auto";
+    activeAudioRef.current = audio;
+
+    try {
+      await audio.play();
+      console.info("[speech] audio narration started", {
+        src: audioSrc,
+      });
+      return true;
+    } catch (error) {
+      console.warn(
+        "[speech] audio narration failed, falling back to browser TTS",
+        {
+          error,
+          src: audioSrc,
+        },
+      );
+
+      if (activeAudioRef.current === audio) {
+        activeAudioRef.current = null;
+      }
+    }
+  }
+
+  return speakLines(lines, selectedVoiceUri);
+}
+
+export function PoemReader({ audioSrc, lines, className }: PoemReaderProps) {
   const pathname = usePathname();
   const { autoRead, isReady, selectedVoiceUri } = useSpeechSettings();
   const autoReadPathRef = useRef<string | null>(null);
+  const activeAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     if (!isReady || !autoRead) {
@@ -133,12 +181,17 @@ export function PoemReader({ lines, className }: PoemReaderProps) {
     }
 
     const attempt = () => {
-      const spoke = speakLines(lines, selectedVoiceUri);
-
-      if (spoke) {
-        autoReadPathRef.current = pathname;
-        window.speechSynthesis?.removeEventListener("voiceschanged", attempt);
-      }
+      void readPoem({
+        activeAudioRef,
+        audioSrc,
+        lines,
+        selectedVoiceUri,
+      }).then((spoke) => {
+        if (spoke) {
+          autoReadPathRef.current = pathname;
+          window.speechSynthesis?.removeEventListener("voiceschanged", attempt);
+        }
+      });
     };
 
     const timeoutId = window.setTimeout(attempt, 180);
@@ -148,7 +201,17 @@ export function PoemReader({ lines, className }: PoemReaderProps) {
       window.clearTimeout(timeoutId);
       window.speechSynthesis?.removeEventListener("voiceschanged", attempt);
     };
-  }, [autoRead, isReady, lines, pathname, selectedVoiceUri]);
+  }, [audioSrc, autoRead, isReady, lines, pathname, selectedVoiceUri]);
+
+  useEffect(() => {
+    return () => {
+      if (activeAudioRef.current) {
+        activeAudioRef.current.pause();
+        activeAudioRef.current.currentTime = 0;
+        activeAudioRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <button
@@ -161,7 +224,12 @@ export function PoemReader({ lines, className }: PoemReaderProps) {
         className,
       )}
       onClick={() => {
-        speakLines(lines, selectedVoiceUri);
+        void readPoem({
+          activeAudioRef,
+          audioSrc,
+          lines,
+          selectedVoiceUri,
+        });
       }}
       type="button"
     >
