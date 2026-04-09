@@ -20,10 +20,18 @@ export default async function QrHelperPage() {
   const headerList = await headers();
   const origin = getRequestOrigin(headerList);
   const steps = getSteps();
+  const introBuddyArt = getThemeBuddyArt("intro");
 
   return (
     <main className="min-h-screen bg-white px-4 py-6 print:px-3 print:py-3">
       <section className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3 print:max-w-none print:grid-cols-3">
+        <QrPrintCard
+          badgeAlt={introBuddyArt.alt}
+          badgeSrc={introBuddyArt.src}
+          title="Start"
+          value={`${origin}/`}
+        />
+
         {steps.map((step, index) => {
           const nextStep = getNextStep(step.id);
           const destination = nextStep ? getStepUrl(nextStep.id) : "/done";
