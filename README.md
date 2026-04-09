@@ -1,21 +1,51 @@
 # Treasure Trail
 
-A whimsical scavenger hunt app built with Next.js, Tailwind CSS v4, and shadcn-style components.
+A whimsical QR-powered scavenger hunt app for a birthday treasure trail, built with Next.js, Tailwind CSS v4, and lightweight shadcn-style UI primitives.
+
+## Overview
+
+The app is currently configured from a single JSON file and is designed so that the data source can later move to a server without rewriting the UI.
+
+Current experience:
+
+- `/` landing page with the intro poem and Bubbles the unicorn
+- `/hunt/[stepId]` clue pages with poem clues, buddy art, and a placeholder scanner button
+- `/done` finale page
+- `/dev/qrs` printable QR helper page for generating next-step links
 
 ## Commands
 
 ```bash
 pnpm install
 pnpm dev
+pnpm lint
+pnpm build
 ```
 
-## Content
+## Content Model
 
-Edit [`src/content/hunt.json`](./src/content/hunt.json) to change the event title, intro copy, theme, steps, and the URLs used for printable QR codes.
+Edit [`src/content/hunt.json`](./src/content/hunt.json) to change:
 
-## Routes
+- event title and intro/finale poem copy
+- theme selection
+- start button label
+- clue titles and poem lines
+- QR base URL used by the printable QR helper
 
-- `/` landing page
-- `/hunt/[stepId]` clue pages
-- `/done` finale page
-- `/dev/qrs` printable QR helper page
+The JSON file is the current source of truth for the hunt flow.
+
+## Theme Assets
+
+The current unicorn theme is defined in [`src/lib/themes.ts`](./src/lib/themes.ts).
+
+Unicorn artwork lives in:
+
+- [`public/media/unicorns/unicorn-intro.png`](./public/media/unicorns/unicorn-intro.png)
+- [`public/media/unicorns/unicorn-yay.png`](./public/media/unicorns/unicorn-yay.png)
+- [`public/media/unicorns/unicorn-1.png`](./public/media/unicorns/unicorn-1.png) through [`public/media/unicorns/unicorn-7.png`](./public/media/unicorns/unicorn-7.png)
+
+## Project Notes
+
+- The home and clue pages are optimized for mobile-first use during an actual scavenger hunt.
+- The scanner button on clue pages is intentionally a placeholder for now.
+- If the content model, routes, or theme system changes, update this README and `AGENTS.md` in the same change.
