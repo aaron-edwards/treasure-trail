@@ -42,7 +42,7 @@ function speakLines(lines: string[]) {
   synthesis.cancel();
 
   const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 0.95;
+  utterance.rate = 0.80;
   utterance.pitch = 1.05;
   utterance.volume = 1;
 
