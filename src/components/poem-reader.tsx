@@ -1,7 +1,8 @@
 "use client";
 
 import { Volume2 } from "lucide-react";
-import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 import { useSpeechSettings } from "@/components/speech-settings";
 import { buttonVariants } from "@/components/ui/button";
@@ -118,15 +119,22 @@ function speakLines(lines: string[], selectedVoiceUri: string | null) {
 }
 
 export function PoemReader({ lines, className }: PoemReaderProps) {
+  const pathname = usePathname();
   const { autoRead, isReady, selectedVoiceUri } = useSpeechSettings();
+  const autoReadPathRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!isReady || !autoRead) {
       return;
     }
 
+    if (autoReadPathRef.current === pathname) {
+      return;
+    }
+
     const attempt = () => {
       speakLines(lines, selectedVoiceUri);
+      autoReadPathRef.current = pathname;
     };
 
     const timeoutId = window.setTimeout(attempt, 180);
@@ -135,9 +143,8 @@ export function PoemReader({ lines, className }: PoemReaderProps) {
     return () => {
       window.clearTimeout(timeoutId);
       window.speechSynthesis?.removeEventListener("voiceschanged", attempt);
-      window.speechSynthesis?.cancel();
     };
-  }, [autoRead, isReady, lines, selectedVoiceUri]);
+  }, [autoRead, isReady, lines, pathname, selectedVoiceUri]);
 
   return (
     <button
