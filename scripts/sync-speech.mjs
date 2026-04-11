@@ -4,7 +4,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { del, list, put } from "@vercel/blob";
+import { del, head, list, put } from "@vercel/blob";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, "..");
@@ -281,6 +281,10 @@ async function cleanupUnusedSpeechBlobs(manifest) {
     token: BLOB_TOKEN,
   });
 
+  log("listed speech blobs", {
+    count: blobs.length,
+  });
+
   const staleUrls = blobs
     .map((blob) => blob.url)
     .filter((url) => !referencedUrls.has(url));
@@ -297,6 +301,31 @@ async function cleanupUnusedSpeechBlobs(manifest) {
   await del(staleUrls, {
     token: BLOB_TOKEN,
   });
+}
+
+async function findExistingBlobUrl(blobPath) {
+  try {
+    log("checking blob cache", {
+      blobPath,
+    });
+
+    const blob = await head(blobPath, {
+      token: BLOB_TOKEN,
+    });
+
+    log("blob cache hit", {
+      blobPath,
+      url: blob.url,
+    });
+
+    return blob.url;
+  } catch {
+    log("blob cache miss", {
+      blobPath,
+    });
+
+    return null;
+  }
 }
 
 async function main() {
@@ -342,15 +371,24 @@ async function main() {
     steps: {},
   };
 
+  log("starting speech sync", {
+    entries: entries.length,
+    model: GEMINI_MODEL,
+    voice: GEMINI_VOICE,
+  });
+
   for (const entry of entries) {
     const hash = buildEntryHash(entry.prompt);
+    const blobPath = `speech/${entry.slug}-${hash}.wav`;
     const currentEntry =
       entry.kind === "event"
         ? normalizedManifest.event[entry.manifestKey]
         : normalizedManifest.steps[entry.manifestKey];
 
     if (currentEntry?.hash === hash && currentEntry.url) {
-      log("reusing cached speech asset", {
+      log("manifest cache hit", {
+        blobPath,
+        hash,
         id: entry.id,
         url: currentEntry.url,
       });
@@ -364,15 +402,54 @@ async function main() {
       continue;
     }
 
-    log("generating speech asset", { id: entry.id });
+    const existingBlobUrl = await findExistingBlobUrl(blobPath);
+
+    if (existingBlobUrl) {
+      log("reusing blob cache entry", {
+        blobPath,
+        hash,
+        id: entry.id,
+        url: existingBlobUrl,
+      });
+
+      const manifestEntry = {
+        hash,
+        url: existingBlobUrl,
+      };
+
+      if (entry.kind === "event") {
+        nextManifest.event[entry.manifestKey] = manifestEntry;
+      } else {
+        nextManifest.steps[entry.manifestKey] = manifestEntry;
+      }
+
+      continue;
+    }
+
+    log("generating speech asset", {
+      blobPath,
+      hash,
+      id: entry.id,
+    });
 
     const audioBuffer = await synthesizeWithGemini(entry.prompt);
-    const blobPath = `speech/${entry.slug}-${hash}.wav`;
+    log("generated speech asset", {
+      bytes: audioBuffer.length,
+      id: entry.id,
+    });
+
     const blob = await put(blobPath, audioBuffer, {
       access: "public",
       addRandomSuffix: false,
+      allowOverwrite: true,
       contentType: "audio/wav",
       token: BLOB_TOKEN,
+    });
+
+    log("uploaded speech asset", {
+      blobPath,
+      id: entry.id,
+      url: blob.url,
     });
 
     const manifestEntry = {
@@ -392,6 +469,10 @@ async function main() {
     `${JSON.stringify(nextManifest, null, 2)}\n`,
     "utf8",
   );
+
+  log("wrote speech manifest", {
+    manifestPath,
+  });
 
   await cleanupUnusedSpeechBlobs(nextManifest);
 }
